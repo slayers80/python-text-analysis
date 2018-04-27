@@ -35,3 +35,10 @@ def LongestSubstring(s, k):
             return max(m)
         else:
             return 0
+        
+        
+def longestSubstring(s, k):
+    for c in set(s):
+        if s.count(c) < k:
+            return max(longestSubstring(t, k) for t in s.split(c))
+    return len(s)        
