@@ -9,32 +9,27 @@ def LongestSubstring(s, k):
     
     if len(s)<k:
         return 0
-    
+
     dic = {}
     for ch in s:
         if ch in dic:
             dic[ch] += 1
         else:
             dic[ch] = 1
-    
-    rarestfreq = min(dic.itervalues())
-    if rarestfreq>=k:
-        return len(s)
-    
-    else:
-        for a in dic.iteritems():
-            if a[1] == rarestfreq:
-                rarestletter = a[0]
+
+    if min(dic.itervalues())>=k:
+        return len(s)  
         
-        print rarestletter
-        m = []
-        for s1 in s.split(rarestletter):
-            m.append(LongestSubstring(s1,k))
-        if max(m)>=k:
-#            print max(m)
-            return max(m)
-        else:
-            return 0
+    for key in dic:
+        if dic[key] < k:
+            
+            m = []
+            for s1 in s.split(key):
+                m.append(longestSubstring(s1,k))
+            if max(m)>=k:
+                return max(m)
+            else:
+                return 0
         
         
 def longestSubstring(s, k):
