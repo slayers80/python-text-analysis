@@ -32,28 +32,28 @@ def buildTree(preorder, inorder):
 def buildTree2(preorder, inorder):
     if not preorder: return
     
-        preorder_iter, inorder_iter = iter(preorder), iter(inorder)
-        root, curr_inorder_val = TreeNode(next(preorder_iter)), next(inorder_iter)
-        
-        stack, node, build_right_tree = [root], root, False
-        while True:
-            try:
-                if stack and stack[-1].val == curr_inorder_val:
-                    node = stack.pop() # now it is the root node, and onto building its right tree.
-                    curr_inorder_val = next(inorder_iter)
-                    build_right_tree = True
+    preorder_iter, inorder_iter = iter(preorder), iter(inorder)
+    root, curr_inorder_val = TreeNode(next(preorder_iter)), next(inorder_iter)
+    
+    stack, node, build_right_tree = [root], root, False
+    while True:
+        try:
+            if stack and stack[-1].val == curr_inorder_val:
+                node = stack.pop() # now it is the root node, and onto building its right tree.
+                curr_inorder_val = next(inorder_iter)
+                build_right_tree = True
+            else:
+                if build_right_tree:
+                    node.right = TreeNode(next(preorder_iter))
+                    node = node.right
+                    build_right_tree = False
                 else:
-                    if build_right_tree:
-                        node.right = TreeNode(next(preorder_iter))
-                        node = node.right
-                        build_right_tree = False
-                    else:
-                        node.left = TreeNode(next(preorder_iter))
-                        node = node.left
+                    node.left = TreeNode(next(preorder_iter))
+                    node = node.left
 
-                    stack.append(node)
-            except StopIteration:
-                break
+                stack.append(node)
+        except StopIteration:
+            break
 
         return root
 
