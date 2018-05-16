@@ -26,3 +26,11 @@ def spiralOrder(matrix):
                 for i in range(m-r-2, r, -1):
                     res += [matrix[i][r]]
     return res
+
+
+def spiralOrder(matrix):
+    """
+    :type matrix: List[List[int]]
+    :rtype: List[int]
+    """
+    return matrix and list(matrix.pop(0)) + self.spiralOrder(zip(*matrix)[::-1])
