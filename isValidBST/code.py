@@ -5,7 +5,7 @@ Created on Sat May 19 22:29:44 2018
 @author: lwang
 """
 
-def isValidBST(root):
+def isValidBST1(root):
     """
     :type root: TreeNode
     :rtype: bool
