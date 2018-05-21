@@ -34,3 +34,13 @@ def largestNumber(nums):
                 break
     
     return res[i:]
+
+
+def largestNumber2(nums):
+    """
+    :type nums: List[int]
+    :rtype: str
+    """
+    num = [str(x) for x in nums]
+    num.sort(cmp=lambda x, y: cmp(y+x, x+y))
+    return ''.join(num).lstrip('0') or '0'
