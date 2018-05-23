@@ -119,9 +119,6 @@ def ladderLength2(beginWord, endWord, wordList):
             if set.intersection(frontiers1, frontiers2):                 
                 return level1+level2-1
         
-        print len(frontiers1), len(unvisited1), len(frontiers2), len(unvisited2)
-        
-        
     if endWord in unvisited1:
         return 0
     
