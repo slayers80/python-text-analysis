@@ -177,8 +177,6 @@ def ladderLength3(beginWord, endWord, wordList):
                 unvisited2 = set(remainwords2)
             frontiers2 = nex2                
             level2 += 1
-        
-        print len(frontiers1), len(unvisited1), len(frontiers2), len(unvisited2)
 
         if set.intersection(frontiers1, frontiers2):
             return level1+level2-1
