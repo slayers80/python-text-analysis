@@ -34,21 +34,22 @@ class Codec:
         def recur(data):
             
             if not data:
-                return []
+                return []            
             
             node = TreeNode(None)
             if len(data)>=3:
-                node.val = data.pop(0)
+                node.val = data.pop()
                 
-                if data[0]!=None:
+                if data[-1]!=None:
                     node.left = recur(data)
                 else:
-                    node.left = data.pop(0)
-                if data[0]!=None:
+                    node.left = data.pop()
+                if data[-1]!=None:
                     node.right = recur(data)
                 else:
-                    node.right = data.pop(0)
+                    node.right = data.pop()
             
             return node
         
+        data = data[::-1]
         return recur(data)
