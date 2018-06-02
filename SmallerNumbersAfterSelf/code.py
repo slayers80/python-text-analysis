@@ -9,8 +9,7 @@ def countSmaller(nums):
     """
     :type nums: List[int]
     :rtype: List[int]
-    """
-    
+    """    
     if nums:            
         res = [0]*len(nums)
         for i in range(len(nums)):
@@ -28,8 +27,6 @@ def countSmaller2(nums):
     :type nums: List[int]
     :rtype: List[int]
     """
-    
-
     def sort(enum):
         half = len(enum) / 2
         if half:
