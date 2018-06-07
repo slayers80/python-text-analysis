@@ -36,5 +36,5 @@ def largestRectangleArea2(heights):
             w = i - stack[-1] - 1
             ans = max(ans, h * w)
         stack.append(i)
-    
+    heights.pop()
     return ans
