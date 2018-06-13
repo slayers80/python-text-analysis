@@ -13,33 +13,49 @@ def findWords(board, words):
     """
     
     m, n = len(board), len(board[0])
-    def search(i,j,m,n,newwords):
-        if not words or i>=m or i<0 or j>=n or j<0:
-            return False
-        else:
-            found = False
+    def dfs(i,j,m,n,newwords,parents,branch,res):
+        
+        if (i,j) not in parents:
             nextwords = []
-            for word in newwords:                    
+            for word in newwords:
                 if board[i][j] == word[0]:
-                    found = True
                     if word[1:]:
-                        nextwords.append(word[1:])
-            if found and nextwords:
-                re = search(i-1,j,m,n,nextwords) or search(i+1,j,m,n,nextwords) or search(i,j-1,m,n,nextwords) or search(i,j+1,m,n,nextwords)
-                if not re:
-                    return False
-                else:
-                    return board[i][j]+re
-            elif found and not nextwords:
-                return board[i][j]
-            else:
-                return False
+                        nextwords.append(word[1:])                            
+                    else:
+                        if branch+word[0] not in res:
+                            res.append(branch+word[0])
+            #print (i,j), branch, parents, nextwords
+            if nextwords:                    
+                if i-1>=0:
+                    branch = branch+board[i][j]
+                    parents.add((i,j))
+                    dfs(i-1,j,m,n,nextwords,parents,branch,res)
+                    branch = branch[:-1]
+                    parents.remove((i,j))
+                if i+1<m:
+                    branch = branch+board[i][j]
+                    parents.add((i,j))
+                    dfs(i+1,j,m,n,nextwords,parents,branch,res)
+                    branch = branch[:-1]
+                    parents.remove((i,j))
+                if j-1>=0:
+                    branch = branch+board[i][j]
+                    parents.add((i,j))
+                    dfs(i,j-1,m,n,nextwords,parents,branch,res)
+                    branch = branch[:-1]
+                    parents.remove((i,j))
+                if j+1<n:
+                    branch = branch+board[i][j]
+                    parents.add((i,j))
+                    dfs(i,j+1,m,n,nextwords,parents,branch,res)
+                    branch = branch[:-1]
+                    parents.remove((i,j))
     
     res = []
+    parents = set()
+    branch=""
     for i in range(m):
         for j in range(n):
-            r = search(i,j,m,n,words)
-            if r and r not in res:
-                res.append(r)
-                
+            dfs(i,j,m,n,words,parents,branch,res)                
+               
     return res
