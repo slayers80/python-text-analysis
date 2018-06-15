@@ -23,7 +23,7 @@ def findWords(board, words):
                         nextwords.append(word[1:])                            
                     else:
                         if branch+word[0] not in res:
-                            res.append(branch+word[0])
+                            res.add(branch+word[0])
             #print (i,j), branch, parents, nextwords
             if nextwords:                    
                 if i-1>=0:
@@ -51,11 +51,15 @@ def findWords(board, words):
                     branch = branch[:-1]
                     parents.remove((i,j))
     
-    res = []
+    res = set()
     parents = set()
     branch=""
-    for i in range(m):
-        for j in range(n):
-            dfs(i,j,m,n,words,parents,branch,res)                
-               
-    return res
+    remainingwords = set(words)
+    for i in range(m-1,-1,-1):
+        for j in range(n-1,-1,-1):
+            remainingwords = remainingwords.difference(res)
+            #print len(remainingwords),res
+            if remainingwords:
+                dfs(i,j,m,n,list(remainingwords),parents,branch,res)                
+                
+    return list(res)
