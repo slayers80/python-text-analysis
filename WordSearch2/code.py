@@ -49,8 +49,7 @@ def findWords(board, words):
                     parents.add((i,j))
                     dfs(i,j+1,m,n,nextwords,parents,branch,res)
                     branch = branch[:-1]
-                    parents.remove((i,j))
-    
+                    parents.remove((i,j))    
     res = set()
     parents = set()
     branch=""
